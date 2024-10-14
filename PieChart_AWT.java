@@ -9,12 +9,13 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
  
 public class PieChart_AWT extends ApplicationFrame {
-   
+
+   // Class initialization
    public PieChart_AWT( String title ) {
       super( title ); 
       setContentPane(createDemoPanel( ));
    }
-   
+
    private static PieDataset createDataset( ) {
       DefaultPieDataset dataset = new DefaultPieDataset( );
       dataset.setValue( "IPhone 5s" , 20 );

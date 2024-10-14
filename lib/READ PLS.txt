@@ -1,0 +1,23 @@
+These are the JFreeChart external libraries that are required to use it for data visualisation.
+
+So far, the best way I can think of is to put it this separate folder, so I'll give instructions on how I added it to IntelliJ.
+
+I will probably look in to a better way of using external libraries for our submission, if someone has a better way of doing this, please fix this <3
+
+How to install this on Intellij:
+
+1. Download this repository
+
+2. Press crtl + alt + shift + s
+OR
+Hover over the File tab (top left) and click Project Structure
+
+3. In project Settings, click the 'Modules' tab and then 'Dependencies'
+
+4. Click the + button below 'Module SDK: ___' and then click 'JARs or Directories...'
+
+5. Navigate to .../BlockProject/lib/ in this repository's directory and click on one of the .jar files.
+
+6. Repeat for the second .jar file
+
+It should work now

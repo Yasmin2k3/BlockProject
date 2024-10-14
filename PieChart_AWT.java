@@ -39,6 +39,9 @@ public class PieChart_AWT extends ApplicationFrame {
       return chart;
    }
 
+   //Following 2 methods are of my own doing, with this, you can make a colour scheme for the pie chart
+   //and with this I'm sure we can figure out how to implement this for the other graphs as well
+
    private static void createColorScheme(JFreeChart chart, Color[] colorScheme){
       PiePlot plot = (PiePlot) chart.getPlot();
       PieDataset ds = plot.getDataset();

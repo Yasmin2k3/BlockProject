@@ -3,11 +3,14 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
- 
+
+import java.awt.*;
+
 public class PieChart_AWT extends ApplicationFrame {
 
    // Class initialization
@@ -35,9 +38,29 @@ public class PieChart_AWT extends ApplicationFrame {
 
       return chart;
    }
+
+   private static void createColorScheme(JFreeChart chart, Color[] colorScheme){
+      PiePlot plot = (PiePlot) chart.getPlot();
+      PieDataset ds = plot.getDataset();
+
+      for(int i = 0; i < ds.getItemCount(); i++){
+         plot.setSectionPaint(ds.getKey(i), colorScheme[i]);
+      }
+   }
+
+   private static Color[] getColorScheme(){
+      Color[] scheme = {(new Color(244, 233, 205)), //yellow/ off-white
+              (new Color(157, 190, 187)), //light blue
+              (new Color(119, 172, 162)), //light turquoise
+              (new Color(70, 129, 137)),  //darker turquoise
+              (new Color(3, 25, 38))}; //dark blue
+
+      return scheme;
+   }
    
    public static JPanel createDemoPanel( ) {
-      JFreeChart chart = createChart(createDataset( ) );  
+      JFreeChart chart = createChart(createDataset( ) );
+      createColorScheme(chart, getColorScheme());
       return new ChartPanel( chart ); 
    }
 

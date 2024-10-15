@@ -7,30 +7,53 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
 
 import java.awt.*;
 
 public class PieChart_AWT extends ApplicationFrame {
+   private Color[] colorScheme;
+   private String title;
 
    // Class initialization
    public PieChart_AWT( String title ) {
-      super( title ); 
-      setContentPane(createDemoPanel( ));
+      super( title );
+      this.title = title;
+      this.colorScheme = getDefaultColorScheme();
    }
 
-   private static PieDataset createDataset( ) {
+   //sets default colour scheme
+   private static Color[] getDefaultColorScheme(){
+      Color[] scheme = {(new Color(244, 233, 205)), //yellow/ off-white
+              (new Color(157, 190, 187)), //light blue
+              (new Color(119, 172, 162)), //light turquoise
+              (new Color(70, 129, 137)),  //darker turquoise
+              (new Color(3, 25, 38))}; //dark blue
+
+      return scheme;
+   }
+
+   //you can set the colour scheme with this!!!
+   public void setColorScheme(Color[] scheme){
+      this.colorScheme = scheme;
+   }
+
+   //dataset for pie chart, making the inputs two arrays so to keep things simple, but some kind of mapping would be better
+   private static PieDataset createDataset(String[] keys, double[] values) {
       DefaultPieDataset dataset = new DefaultPieDataset( );
-      dataset.setValue( "IPhone 5s" , 20 );
-      dataset.setValue( "SamSung Grand" , 20 );
-      dataset.setValue( "MotoG" , 40 );
-      dataset.setValue( "Nokia Lumia" , 10 );
+
+      if (keys.length != values.length){
+         System.out.println("dataset keys and values not the right length!");
+         return null;
+      }
+      for (int i=0; i< keys.length; i++){
+         dataset.setValue(keys[i], values[i]);
+      }
       return dataset;         
    }
    
-   private static JFreeChart createChart( PieDataset dataset ) {
+   private static JFreeChart createChart(String title, PieDataset dataset ) {
       JFreeChart chart = ChartFactory.createPieChart(      
-         "Mobile Sales",   // chart title 
+         title,   // chart title
          dataset,          // data    
          true,             // include legend   
          true, 
@@ -42,7 +65,7 @@ public class PieChart_AWT extends ApplicationFrame {
    //Following 2 methods are of my own doing, with this, you can make a colour scheme for the pie chart
    //and with this I'm sure we can figure out how to implement this for the other graphs as well
 
-   private static void createColorScheme(JFreeChart chart, Color[] colorScheme){
+   private void createColorScheme(JFreeChart chart){
       PiePlot plot = (PiePlot) chart.getPlot();
       PieDataset ds = plot.getDataset();
 
@@ -50,20 +73,13 @@ public class PieChart_AWT extends ApplicationFrame {
          plot.setSectionPaint(ds.getKey(i), colorScheme[i]);
       }
    }
-
-   private static Color[] getColorScheme(){
-      Color[] scheme = {(new Color(244, 233, 205)), //yellow/ off-white
-              (new Color(157, 190, 187)), //light blue
-              (new Color(119, 172, 162)), //light turquoise
-              (new Color(70, 129, 137)),  //darker turquoise
-              (new Color(3, 25, 38))}; //dark blue
-
-      return scheme;
-   }
    
-   public static JPanel createDemoPanel( ) {
-      JFreeChart chart = createChart(createDataset( ) );
-      createColorScheme(chart, getColorScheme());
-      return new ChartPanel( chart ); 
-   }
+   public JPanel createPanel() {
+         String[] phones = {"idle", "user", "sys", "soft", "guest"};
+         double[] nums = {70.5, 1.19, 10.49, 7.80, 10.02};
+
+         JFreeChart chart = createChart(title, createDataset(phones, nums) );
+         createColorScheme(chart);
+         return new ChartPanel( chart );
+      }
 }

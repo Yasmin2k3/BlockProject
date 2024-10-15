@@ -66,11 +66,4 @@ public class PieChart_AWT extends ApplicationFrame {
       createColorScheme(chart, getColorScheme());
       return new ChartPanel( chart ); 
    }
-
-   public static void main( String[ ] args ) {
-      PieChart_AWT demo = new PieChart_AWT( "Mobile Sales" );  
-      demo.setSize( 560 , 367 );    
-      RefineryUtilities.centerFrameOnScreen( demo );    
-      demo.setVisible( true ); 
-   }
 }

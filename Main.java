@@ -1,4 +1,3 @@
-import org.jfree.chart.ChartPanel;
 import org.jfree.ui.RefineryUtilities;
 
 public class Main {
@@ -16,7 +15,7 @@ public class Main {
     }
 
     private static void printBarChart(){
-        BarChart_AWT chart = new BarChart_AWT("Car Usage Statistics");
+        BarChart_AWT chart = new BarChart_AWT("Car Usage Statistics", "Which car do you like?");
         chart.pack( );
         RefineryUtilities.centerFrameOnScreen( chart );
         chart.setVisible( true );

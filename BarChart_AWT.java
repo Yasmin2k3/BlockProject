@@ -13,22 +13,22 @@ import java.awt.*;
 
 public class BarChart_AWT extends ApplicationFrame {
    
-   public BarChart_AWT( String applicationTitle) {
+   public BarChart_AWT( String applicationTitle, String title) {
       super( applicationTitle );
-      setContentPane( createDemoPanel() );
+      setContentPane(createDemoPanel(title));
    }
 
-   public static JPanel createDemoPanel(){
-      JFreeChart chart = createBarChart(createDataset( ));
+   public static JPanel createDemoPanel(String title){
+      JFreeChart chart = createBarChart(createDataset( ), title);
       createColorScheme(chart, getColorScheme());
       ChartPanel chartPanel = new ChartPanel( chart );
       chartPanel.setPreferredSize(new java.awt.Dimension( 560 , 367 ) );
       return new ChartPanel( chart );
    }
 
-   private static JFreeChart createBarChart(CategoryDataset dataset){
+   private static JFreeChart createBarChart(CategoryDataset dataset, String title){
       JFreeChart barChart = ChartFactory.createBarChart(
-              "Which car do you like?",
+              title,
               "Category",
               "Score",
               dataset,
